@@ -17,8 +17,6 @@ namespace Todo.Data
 
         public DbSet<TodoItem> Todos { get; set; }  
         public DbSet<Product> Products { get; set; }
-
-        Product product = new Product();
         
         
     }
