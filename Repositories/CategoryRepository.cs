@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using Todo.Data;
 using Todo.Interface.Repository;
 using Todo.Models;
@@ -15,14 +16,15 @@ namespace Todo.Repositories
         {
             _context = context;
         }
-        public Task CreateCategory(Category category)
+        public async Task CreateCategory(Category category)
         {
-            throw new NotImplementedException();
+            await _context.Categories.AddAsync(category);
+            await _context.SaveChangesAsync();
         }
 
-        public Task<List<Category>> GetCategories()
+        public async Task<List<Category>> GetCategories()
         {
-            throw new NotImplementedException();
+            return await _context.Categories.ToListAsync();
         }
     }
 }

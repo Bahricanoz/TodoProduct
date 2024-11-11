@@ -48,5 +48,13 @@ namespace Todo.Middlewares
             return context.Response.WriteAsync(result);
         }
     }
+
+    // public static class CustomExceptionMiddlewareExtensions
+    // {
+    //     public static IApplicationBuilder UseCustomExceptionMiddleware(this IApplicationBuilder builder)
+    //     {
+    //         return builder.UseMiddleware<CustomExceptionMiddleware>();
+    //     }
+    // }
     
 }

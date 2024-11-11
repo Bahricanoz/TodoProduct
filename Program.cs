@@ -3,6 +3,7 @@ using Hangfire.PostgreSql;
 using Microsoft.EntityFrameworkCore;
 using Todo.Data;
 using Todo.Interface;
+using Todo.Interface.Repository;
 using Todo.Middlewares;
 using Todo.Repositories;
 using Todo.Services;
@@ -17,9 +18,12 @@ builder.Services.AddControllers();
 
 builder.Services.AddScoped<ITodoRepository, TodoRepository>();
 builder.Services.AddScoped<IProductRepository,ProductRepository>();
+builder.Services.AddScoped<ICategoryRepository,CategoryRepository>();   
+
 
 builder.Services.AddScoped<INotificationService, NotificationService>();
 builder.Services.AddScoped<ICurrencyService,CurrencyService>();
+
 builder.Services.AddSingleton<ILoggerService,ConsoleLoggerService>();
 
 builder.Services.AddControllers().AddNewtonsoftJson(options =>
