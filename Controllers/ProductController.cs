@@ -28,62 +28,41 @@ namespace Todo.Controllers
         [HttpGet]
         public async Task<IActionResult> GetProducts()
         {
-            try{
-                var product = await _productRepository.GetProducts();
-                return Ok(product);
-            }catch(Exception ex){
-                return BadRequest(ex.Message);
-            }
+            var product = await _productRepository.GetProducts();
+            return Ok(product);      
         }
         [HttpPost]
         public async Task<IActionResult> CreateProduct([FromBody] ProductDto productDto){
-            try{
-                await _productRepository.AddProduct(productDto.MapToProduct()); 
-                BackgroundJob.Enqueue(() => _notificationService.SendNotification("Product added"));
-                return Ok("Product added successfully");
-            }catch(Exception ex){
-                return BadRequest(ex.Message);
-            }
+            await _productRepository.AddProduct(productDto.MapToProduct()); 
+            BackgroundJob.Enqueue(() => _notificationService.SendNotification("Product added"));
+            return Ok("Product added successfully");    
         }
         [HttpGet("{id}")]
         public async Task<IActionResult> GetProductById(int id){
-            try{
-                var product = await _productRepository.GetProductById(id);
-                if(product == null){
-                    return NotFound("Product not found");
-                }
-                return Ok(product);
-            }catch(Exception ex){
-                return BadRequest(ex.Message);
+            var product = await _productRepository.GetProductById(id);
+            if(product == null){
+                return NotFound("Product not found");
             }
+            return Ok(product);
         }
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteProduct([FromRoute ]int id){
-            try{
-                var product = await _productRepository.DeleteProduct(id);
-                if(product == null){
-                    return NotFound("Product not found");
-                }
-                BackgroundJob.Schedule(() => _notificationService.SendNotification("Product deleted"), TimeSpan.FromMinutes(1));
-                return Ok("Product deleted successfully");
-            }catch(Exception ex){
-                return BadRequest(ex.Message);
+            var product = await _productRepository.DeleteProduct(id);
+            if(product == null){
+                return NotFound("Product not found");
             }
+            BackgroundJob.Schedule(() => _notificationService.SendNotification("Product deleted"), TimeSpan.FromMinutes(1));
+            return Ok("Product deleted successfully");     
         }
 
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateProdcut([FromRoute] int id, [FromBody] ProductDto productDto){
-            try{
-                var product = await _productRepository.UpdateProduct(id, productDto.MapToProduct());
-                if(product == null){
-                    return NotFound("Product not found");
-                }
-                BackgroundJob.Schedule(() => _notificationService.SendNotification("Product updated"), TimeSpan.FromMinutes(1));
-                return Ok("Product updated successfully");       
-            }catch(Exception ex){
-                return BadRequest(ex.Message);
+            var product = await _productRepository.UpdateProduct(id, productDto.MapToProduct());
+            if(product == null){
+                return NotFound("Product not found");
             }
+            BackgroundJob.Schedule(() => _notificationService.SendNotification("Product updated"), TimeSpan.FromMinutes(1));
+            return Ok("Product updated successfully");       
         }
-
     }
 }

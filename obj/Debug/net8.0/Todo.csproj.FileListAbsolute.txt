@@ -132,3 +132,4 @@ C:\Users\Bahri Can Öz\Desktop\Todo\bin\Debug\net8.0\sv\Hangfire.Core.resources.
 C:\Users\Bahri Can Öz\Desktop\Todo\bin\Debug\net8.0\tr-TR\Hangfire.Core.resources.dll
 C:\Users\Bahri Can Öz\Desktop\Todo\bin\Debug\net8.0\zh-TW\Hangfire.Core.resources.dll
 C:\Users\Bahri Can Öz\Desktop\Todo\bin\Debug\net8.0\zh\Hangfire.Core.resources.dll
+C:\Users\Bahri Can Öz\Desktop\Todo\obj\Debug\net8.0\Todo.sourcelink.json

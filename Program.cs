@@ -3,6 +3,7 @@ using Hangfire.PostgreSql;
 using Microsoft.EntityFrameworkCore;
 using Todo.Data;
 using Todo.Interface;
+using Todo.Middelwares;
 using Todo.Repositories;
 using Todo.Services;
 
@@ -16,7 +17,10 @@ builder.Services.AddControllers();
 
 builder.Services.AddScoped<ITodoRepository, TodoRepository>();
 builder.Services.AddScoped<IProductRepository,ProductRepository>();
+
 builder.Services.AddScoped<INotificationService, NotificationService>();
+builder.Services.AddScoped<ICurrencyService,CurrencyService>();
+builder.Services.AddSingleton<ILoggerService,ConsoleLoggerService>();
 
 builder.Services.AddControllers().AddNewtonsoftJson(options =>
     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
@@ -27,6 +31,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 builder.Services.AddHangfire(config =>
     config.UsePostgreSqlStorage(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddScoped<HttpClient>();
 builder.Services.AddHangfireServer();
 
 var app = builder.Build();
@@ -40,6 +46,8 @@ if (app.Environment.IsDevelopment())
 
 app.UseHangfireDashboard();
 app.UseHttpsRedirection();
+
+app.UseMiddleware<CustomExceptionMiddelware>();
 
 app.MapControllers();
 
