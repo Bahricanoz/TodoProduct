@@ -3,7 +3,7 @@ using Hangfire.PostgreSql;
 using Microsoft.EntityFrameworkCore;
 using Todo.Data;
 using Todo.Interface;
-using Todo.Middelwares;
+using Todo.Middlewares;
 using Todo.Repositories;
 using Todo.Services;
 
@@ -47,7 +47,7 @@ if (app.Environment.IsDevelopment())
 app.UseHangfireDashboard();
 app.UseHttpsRedirection();
 
-app.UseMiddleware<CustomExceptionMiddelware>();
+app.UseMiddleware<CustomExceptionMiddleware>();
 
 app.MapControllers();
 

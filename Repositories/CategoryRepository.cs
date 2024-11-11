@@ -11,6 +11,10 @@ namespace Todo.Repositories
     public class CategoryRepository : ICategoryRepository
     {
         private readonly ApplicationDbContext _context;
+        public CategoryRepository(ApplicationDbContext context)
+        {
+            _context = context;
+        }
         public Task CreateCategory(Category category)
         {
             throw new NotImplementedException();

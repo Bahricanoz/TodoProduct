@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Todo.Interface;
 
-namespace Todo.Middelwares
+namespace Todo.Middlewares
 {
-    public class CustomExceptionMiddelware
+    public class CustomExceptionMiddleware
     {
         private readonly RequestDelegate _next;
         private readonly ILoggerService _loggerService;
-        public CustomExceptionMiddelware(RequestDelegate next, ILoggerService loggerService)
+        public CustomExceptionMiddleware(RequestDelegate next, ILoggerService loggerService)
         {
             _next = next;
             _loggerService = loggerService;
