@@ -1,0 +1,6 @@
+# Derleme dosyalarını ve geçici dosyaları dışla
+bin/
+obj/
+*.exe
+*.dll
+*.pdb
